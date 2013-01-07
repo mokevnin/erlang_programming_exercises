@@ -42,4 +42,4 @@ match_test() ->
   Db3 = db:write(key2, el2, Db2),
   Db4 = db:write(key3, el2, Db3),
 
-  ?assertEqual([key2, key3], db:match(el2, Db4)).
+  ?assertEqual([key3, key2], db:match(el2, Db4)).
