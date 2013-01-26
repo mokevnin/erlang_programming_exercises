@@ -10,7 +10,8 @@ start() ->
   {ok, Pid}.
 
 stop(Pid) ->
-  Pid ! stop.
+  Pid ! stop,
+  ok.
   
 on_hook(Pid) ->
   Pid ! {on_hook, self()},
@@ -28,6 +29,8 @@ off_hook(Pid) ->
 
 idle() ->
   receive
+    stop ->
+      ok;
     {off_hook, Pid} ->
       Pid ! {ok, deal},
       deal();
@@ -38,5 +41,12 @@ idle() ->
 
 deal() ->
   receive
-    _ -> true
+    stop ->
+      ok;
+    {on_hook, Pid} ->
+      Pid ! {ok, idle},
+      idle();
+    {_, Pid} -> 
+      Pid ! {error, "can not"},
+      deal()
   end.
