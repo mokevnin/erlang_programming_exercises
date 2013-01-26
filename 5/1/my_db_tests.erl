@@ -1,8 +1,20 @@
 -module(my_db_tests).
 -include_lib("eunit/include/eunit.hrl").
 
-stop_test() -> 
-  my_db:start(),
+start_stop_test_() ->
+  {setup,
+    fun start/0,
+    fun stop/1,
+    [fun stop_success/0]}.
+
+
+start() ->
+  my_db:start().
+
+stop(_) -> 
+  my_db:stop().
+
+stop_success() -> 
   ?assertEqual(ok, my_db:stop()).
 
 %new_test() ->

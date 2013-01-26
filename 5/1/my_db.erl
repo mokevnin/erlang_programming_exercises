@@ -19,25 +19,25 @@ loop(Db) ->
       true
   end.
 
-write(Key, Value, Db) ->
-  write(Key, Value, Db, []).
+%write(Key, Value, Db) ->
+  %write(Key, Value, Db, []).
 
-write(Key, Value, [], ResultDb) ->
-  [{Key, Value} | ResultDb];
-write(Key, Value, [{Key, _} | Tail], ResultDb) ->
-  [{Key, Value} | ResultDb] ++ Tail;
-write(Key, Value, [Head | Tail], ResultDb) ->
-  write(Key, Value, Tail, [Head | ResultDb]).
+%write(Key, Value, [], ResultDb) ->
+  %[{Key, Value} | ResultDb];
+%write(Key, Value, [{Key, _} | Tail], ResultDb) ->
+  %[{Key, Value} | ResultDb] ++ Tail;
+%write(Key, Value, [Head | Tail], ResultDb) ->
+  %write(Key, Value, Tail, [Head | ResultDb]).
 
-delete(KeyForRemove, Db) ->
-  [{Key, Value} || {Key, Value} <- Db, KeyForRemove /= Key].
+%delete(KeyForRemove, Db) ->
+  %[{Key, Value} || {Key, Value} <- Db, KeyForRemove /= Key].
 
-read(_, []) ->
-  {error, instance};
-read(Key, [{Key, Value} | _]) ->
-  Value;
-read(Key, [_ | Tail]) -> 
-  read(Key, Tail).
+%read(_, []) ->
+  %{error, instance};
+%read(Key, [{Key, Value} | _]) ->
+  %Value;
+%read(Key, [_ | Tail]) -> 
+  %read(Key, Tail).
 
-match(Value, Db) ->
-  [Key || {Key, Current} <- Db, Current == Value].
+%match(Value, Db) ->
+  %[Key || {Key, Current} <- Db, Current == Value].
